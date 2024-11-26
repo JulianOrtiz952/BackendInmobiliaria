@@ -1,6 +1,6 @@
 package com.ufps.edu.co.backendInmobiliaria.domain.entity;
 
-import com.ufps.edu.co.backendInmobiliaria.application.dto.Role;
+import com.ufps.edu.co.backendInmobiliaria.domain.extra.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,6 +32,15 @@ public class User implements UserDetails {
     private String lastName;
     private String password;
     private Role role;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Property> ownedProperties;
+
+    @OneToMany(mappedBy = "client")
+    private List<Appointment> appointments;
+
+    @OneToMany(mappedBy = "user")
+    private List<Search> searches;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

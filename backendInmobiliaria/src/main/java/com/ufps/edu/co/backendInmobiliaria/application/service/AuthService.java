@@ -1,6 +1,6 @@
 package com.ufps.edu.co.backendInmobiliaria.application.service;
 
-import com.ufps.edu.co.backendInmobiliaria.application.dto.Role;
+import com.ufps.edu.co.backendInmobiliaria.domain.extra.Role;
 import com.ufps.edu.co.backendInmobiliaria.domain.entity.User;
 import com.ufps.edu.co.backendInmobiliaria.infrastructure.adapter.in.request.LoginRequest;
 import com.ufps.edu.co.backendInmobiliaria.infrastructure.adapter.in.request.SignUpRequest;

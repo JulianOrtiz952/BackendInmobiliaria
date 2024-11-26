@@ -1,18 +1,25 @@
 package com.ufps.edu.co.backendInmobiliaria.application.service;
 
 import com.ufps.edu.co.backendInmobiliaria.application.dto.UserDTO;
-import com.ufps.edu.co.backendInmobiliaria.domain.entity.User;
 import com.ufps.edu.co.backendInmobiliaria.domain.dao.UserRepository;
+import com.ufps.edu.co.backendInmobiliaria.domain.entity.User;
+import com.ufps.edu.co.backendInmobiliaria.domain.extra.Role;
+import com.ufps.edu.co.backendInmobiliaria.infrastructure.adapter.in.request.SignUpRequest;
+import com.ufps.edu.co.backendInmobiliaria.infrastructure.adapter.out.response.AuthResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class AdminService {
 
-
+    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
 
     //find user by id
@@ -24,6 +31,21 @@ public class UserService {
         }
     }
 
+    public AuthResponse createAdmin(SignUpRequest request){
+        var userDTO = User.builder()
+                .name(request.getName())
+                .lastName(request.getLastName())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(Role.ADMIN)
+                .build();
+        userRepository.save(userDTO);
+
+        var jwtToken = jwtService.generateToken(userDTO);
+        return AuthResponse.builder()
+                .token(jwtToken)
+                .build();
+    }
 
 
     //Get a list with user
@@ -71,5 +93,4 @@ public class UserService {
         if (user.isEmpty()) throw new RuntimeException("User doesn't exists");
         return user.get().getName();
     }
-
 }

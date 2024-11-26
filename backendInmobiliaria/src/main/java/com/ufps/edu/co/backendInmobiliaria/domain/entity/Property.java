@@ -1,10 +1,11 @@
 package com.ufps.edu.co.backendInmobiliaria.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.ufps.edu.co.backendInmobiliaria.domain.extra.PropertyType;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Data
@@ -14,11 +15,18 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String type;
-    private String transaction;
-    private String location;
-    private long price;
+    private String title;
     private String description;
-    private String state;
+    private BigDecimal price;
+    private int bedrooms;
+    private int bathrooms;
+    private double area;
+    private PropertyType propertyType;
 
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
+
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
+    private List<Image> images;
 }

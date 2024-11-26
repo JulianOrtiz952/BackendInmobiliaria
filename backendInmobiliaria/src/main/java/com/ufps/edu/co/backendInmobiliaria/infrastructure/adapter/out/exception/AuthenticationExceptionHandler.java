@@ -1,4 +1,4 @@
-package com.ufps.edu.co.backendInmobiliaria.infrastructure.adapter.out.response.exception;
+package com.ufps.edu.co.backendInmobiliaria.infrastructure.adapter.out.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
