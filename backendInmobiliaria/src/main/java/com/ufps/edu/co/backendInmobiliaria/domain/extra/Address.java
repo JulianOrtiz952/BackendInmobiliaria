@@ -1,5 +1,6 @@
 package com.ufps.edu.co.backendInmobiliaria.domain.extra;
 
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
+@Embeddable
 public class Address {
 
     private String street;

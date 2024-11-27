@@ -3,14 +3,16 @@ package com.ufps.edu.co.backendInmobiliaria.application.service;
 import com.ufps.edu.co.backendInmobiliaria.application.dto.PropertyDTO;
 import com.ufps.edu.co.backendInmobiliaria.domain.entity.Property;
 import com.ufps.edu.co.backendInmobiliaria.domain.dao.PropertyRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class PropertyService {
 
-    private PropertyRepository propertyRepository;
+    private final PropertyRepository propertyRepository;
 
     public String createProperty(Property property) {
         if(property!=null){
@@ -19,6 +21,8 @@ public class PropertyService {
         }
         throw new RuntimeException("user has a empty place");
     }
+
+
 //
 //    public PropertyDTO updateProperty(Integer id, Property updatedProperty) {
 //        Property existingProperty = propertyRepository.findById(id).orElseThrow(() -> new RuntimeException("Property not found with id: " + id));
