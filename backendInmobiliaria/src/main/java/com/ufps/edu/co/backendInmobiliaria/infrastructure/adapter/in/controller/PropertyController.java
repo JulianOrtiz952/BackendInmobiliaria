@@ -1,5 +1,6 @@
 package com.ufps.edu.co.backendInmobiliaria.infrastructure.adapter.in.controller;
 
+import com.ufps.edu.co.backendInmobiliaria.application.dto.PropertyDTO;
 import com.ufps.edu.co.backendInmobiliaria.application.service.PropertyService;
 import com.ufps.edu.co.backendInmobiliaria.domain.entity.Property;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class PropertyController {
     private final PropertyService propertyService;
 
     @GetMapping
-    public ResponseEntity<List<Property>> getAllProperties() {
+    public ResponseEntity<List<PropertyDTO>> getAllProperties() {
         return ResponseEntity.ok(propertyService.getAllProperties());
     }
 

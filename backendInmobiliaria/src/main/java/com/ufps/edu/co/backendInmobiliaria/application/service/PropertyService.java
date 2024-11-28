@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -50,9 +51,26 @@ public class PropertyService {
         propertyRepository.deleteById(id);
     }
 
-    public List<Property> getAllProperties() {
-        return propertyRepository.findAll();
+    public List<PropertyDTO> getAllProperties() {
+
+        List<Property> properties = propertyRepository.findAll();
+
+        return properties.stream().map(property -> {
+            return PropertyDTO.builder()
+                    .id(property.getId())
+                    .title(property.getTitle())
+                    .description(property.getDescription())
+                    .price(property.getPrice())
+                    .bedrooms(property.getBedrooms())
+                    .bathrooms(property.getBathrooms())
+                    .area(property.getArea())
+                    .propertyType(property.getPropertyType())
+                    .address(property.getAddress()) // Asumimos que es un objeto Address simple
+                    .images(property.getImages()) // Lista de imágenes asociadas a la propiedad
+                    .build();
+        }).collect(Collectors.toList());
     }
+
 
     public Property getPropertyById(Integer id) {
         return propertyRepository.findById(id)

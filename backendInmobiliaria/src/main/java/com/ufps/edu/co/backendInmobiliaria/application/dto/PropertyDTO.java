@@ -1,9 +1,17 @@
 package com.ufps.edu.co.backendInmobiliaria.application.dto;
 
+import com.ufps.edu.co.backendInmobiliaria.domain.entity.Image;
+import com.ufps.edu.co.backendInmobiliaria.domain.entity.User;
+import com.ufps.edu.co.backendInmobiliaria.domain.extra.Address;
+import com.ufps.edu.co.backendInmobiliaria.domain.extra.PropertyType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Builder
@@ -13,11 +21,15 @@ public class PropertyDTO {
 
     private Integer id;
 
-    private String type;
-    private String transaction;
-    private String location;
-    private long price;
+    private String title;
     private String description;
-    private String state;
+    private BigDecimal price;
+    private int bedrooms;
+    private int bathrooms;
+    private double area;
+    private PropertyType propertyType;
+    private Address address;
+    private User owner;
+    private List<Image> images;
 
 }

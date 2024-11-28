@@ -1,5 +1,6 @@
 package com.ufps.edu.co.backendInmobiliaria.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ufps.edu.co.backendInmobiliaria.domain.entity.Property;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -14,9 +15,12 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String url;
+    private String name;
+
+    private String path;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "property_id")
     private Property property;
 
