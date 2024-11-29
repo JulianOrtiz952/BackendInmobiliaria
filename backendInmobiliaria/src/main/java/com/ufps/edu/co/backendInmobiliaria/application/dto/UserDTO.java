@@ -1,5 +1,6 @@
 package com.ufps.edu.co.backendInmobiliaria.application.dto;
 
+import com.ufps.edu.co.backendInmobiliaria.domain.extra.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

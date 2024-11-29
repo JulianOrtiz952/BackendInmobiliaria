@@ -3,6 +3,8 @@ package com.ufps.edu.co.backendInmobiliaria.application.service;
 import com.ufps.edu.co.backendInmobiliaria.application.dto.UserDTO;
 import com.ufps.edu.co.backendInmobiliaria.domain.entity.User;
 import com.ufps.edu.co.backendInmobiliaria.domain.dao.UserRepository;
+import com.ufps.edu.co.backendInmobiliaria.infrastructure.adapter.out.response.exception.EmptyException;
+import com.ufps.edu.co.backendInmobiliaria.infrastructure.adapter.out.response.exception.InvalidEmailException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ public class UserService {
 
     //find user by id
     public UserDTO findById(Integer id){
+        if(id==null) throw new EmptyException();
         Optional<User> user = userRepository.findById(id);
         if(user.isEmpty()) throw new RuntimeException("User hasn't exist");
         else {
@@ -33,8 +36,9 @@ public class UserService {
 
     //Get user by email
     public UserDTO getUserByEmail(String email){
+        if(email==null) throw new EmptyException();
         Optional<User> user = userRepository.findByEmail(email);
-        if(user.isEmpty()) throw new RuntimeException("Email invalid");
+        if(user.isEmpty()) throw new InvalidEmailException();
         else {
             return UserDTO.builder().email(user.get().getEmail()).name(user.get().getName()).lastName(user.get().getLastName()).build();
         }
@@ -65,8 +69,9 @@ public class UserService {
 
     //Get userName by email
     public UserDTO getNameByEmail(String email){
+        if(email==null) throw new EmptyException();
         Optional<User> user = userRepository.findByEmail(email);
-        if (user.isEmpty()) throw new RuntimeException("User doesn't exists");
+        if (user.isEmpty()) throw new InvalidEmailException();
         return UserDTO.builder().name(user.get().getName()).role(user.get().getRole().ordinal()).build();
     }
 

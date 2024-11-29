@@ -28,6 +28,7 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").permitAll()
                         .requestMatchers("/property/**").permitAll()
                         .requestMatchers("/image/**").permitAll()
+                        .requestMatchers("/account/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManager -> sessionManager
