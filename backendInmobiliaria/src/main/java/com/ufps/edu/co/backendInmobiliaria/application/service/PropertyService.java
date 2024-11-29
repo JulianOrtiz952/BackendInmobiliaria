@@ -1,12 +1,16 @@
 package com.ufps.edu.co.backendInmobiliaria.application.service;
 
 import com.ufps.edu.co.backendInmobiliaria.application.dto.PropertyDTO;
+import com.ufps.edu.co.backendInmobiliaria.domain.dao.AccountRepository;
+import com.ufps.edu.co.backendInmobiliaria.domain.entity.Account;
 import com.ufps.edu.co.backendInmobiliaria.domain.entity.Property;
 import com.ufps.edu.co.backendInmobiliaria.domain.dao.PropertyRepository;
 import com.ufps.edu.co.backendInmobiliaria.domain.extra.PropertyEstate;
+import com.ufps.edu.co.backendInmobiliaria.infrastructure.adapter.in.request.SellRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +19,7 @@ import java.util.stream.Collectors;
 public class PropertyService {
 
     private final PropertyRepository propertyRepository;
+    private final AccountRepository accountRepository;
 
     public String createProperty(Property property) {
         if(property!=null){
@@ -74,6 +79,21 @@ public class PropertyService {
                     .images(property.getImages()) // Lista de imágenes asociadas a la propiedad
                     .build();
         }).collect(Collectors.toList());
+    }
+
+    public String sellProperty(SellRequest sellRequest){
+        Integer id = sellRequest.getId();
+        Integer userId = sellRequest.getUserId();
+        Property property = propertyRepository.findById(id).orElseThrow();
+        Account account = accountRepository.findByUserId(userId);
+        BigDecimal valueProperty = property.getPrice();
+        BigDecimal valueBalance = account.getBalance();
+        if( valueBalance.compareTo(valueProperty) > 0) {
+            account.setBalance(valueBalance.subtract(valueProperty));
+            propertyRepository.deleteById(id);
+            return "Property sell";
+        }
+        else return "naos";
     }
 
 }

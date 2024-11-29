@@ -33,6 +33,9 @@ public class User implements UserDetails {
     private String password;
     private Role role;
 
+    @OneToOne(mappedBy = "user")
+    private Account account;
+
     @OneToMany(mappedBy = "owner")
     private List<Property> ownedProperties;
 
