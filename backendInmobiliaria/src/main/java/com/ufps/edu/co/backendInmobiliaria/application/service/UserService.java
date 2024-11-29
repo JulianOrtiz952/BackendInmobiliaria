@@ -28,7 +28,7 @@ public class UserService {
 
     //Get a list with user
     public String getAllUser(){
-        return userRepository.findAll().stream().map(User::getName).toList().toString();
+        return userRepository.findAll().stream().map(user -> user.getName() + "" +user.getRole()).toList().toString();
     }
 
     //Get user by email
@@ -55,8 +55,6 @@ public class UserService {
         }
         if (updatedUser.getPassword() != null) {
             //Encrypt password
-
-
             existingUser.setPassword(updatedUser.getPassword());
         }
 
@@ -66,10 +64,10 @@ public class UserService {
     }
 
     //Get userName by email
-    public String getNameByEmail(String email){
+    public UserDTO getNameByEmail(String email){
         Optional<User> user = userRepository.findByEmail(email);
         if (user.isEmpty()) throw new RuntimeException("User doesn't exists");
-        return user.get().getName();
+        return UserDTO.builder().name(user.get().getName()).role(user.get().getRole().ordinal()).build();
     }
 
 }

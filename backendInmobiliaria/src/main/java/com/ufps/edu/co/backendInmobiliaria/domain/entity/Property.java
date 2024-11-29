@@ -1,6 +1,7 @@
 package com.ufps.edu.co.backendInmobiliaria.domain.entity;
 
 import com.ufps.edu.co.backendInmobiliaria.domain.extra.Address;
+import com.ufps.edu.co.backendInmobiliaria.domain.extra.PropertyEstate;
 import com.ufps.edu.co.backendInmobiliaria.domain.extra.PropertyType;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class Property {
     private int bathrooms;
     private double area;
     private PropertyType propertyType;
+    private PropertyEstate propertyEstate;
 
     @Embedded
     private Address address;

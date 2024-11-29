@@ -15,6 +15,6 @@ public class UserDTO {
     private String email;
     private String name;
     private String lastName;
-    private String role;  // Representa el rol como String para facilitar la transferencia
+    private int role;
 
 }
