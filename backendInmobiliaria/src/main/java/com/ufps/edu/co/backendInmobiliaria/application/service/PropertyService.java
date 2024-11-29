@@ -49,6 +49,7 @@ public class PropertyService {
                     .bathrooms(property.getBathrooms())
                     .area(property.getArea())
                     .propertyType(property.getPropertyType())
+                    .propertyEstate(property.getPropertyEstate())
                     .address(property.getAddress()) // Asumimos que es un objeto Address simple
                     .images(property.getImages()) // Lista de imágenes asociadas a la propiedad
                     .build();

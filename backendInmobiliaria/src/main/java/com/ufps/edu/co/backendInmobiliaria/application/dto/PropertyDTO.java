@@ -3,6 +3,7 @@ package com.ufps.edu.co.backendInmobiliaria.application.dto;
 import com.ufps.edu.co.backendInmobiliaria.domain.entity.Image;
 import com.ufps.edu.co.backendInmobiliaria.domain.entity.User;
 import com.ufps.edu.co.backendInmobiliaria.domain.extra.Address;
+import com.ufps.edu.co.backendInmobiliaria.domain.extra.PropertyEstate;
 import com.ufps.edu.co.backendInmobiliaria.domain.extra.PropertyType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,7 @@ public class PropertyDTO {
     private int bathrooms;
     private double area;
     private PropertyType propertyType;
+    private PropertyEstate propertyEstate;
     private Address address;
     private User owner;
     private List<Image> images;
